@@ -64,6 +64,7 @@ cr <- ggplot(check2015r, aes(x=seasonr, y=sitetype)) +
   scale_fill_gradient( low = "pink", high = "red") +
   ggtitle("Site Type by Season")
 cr
+ggsave("typexseason.png", cr, bg = "transparent")
 
 #________________________________________________________________________________
 #chart of site type compared to number of surveys in each by survey
@@ -74,7 +75,7 @@ c <- ggplot(check2015, aes(x=season, y=sitetype)) +
   scale_fill_gradient( low = "pink", high = "red") +
   ggtitle("Site Type by Season")
 c
-ggsave("typexseason2.png", c, bg = "transparent")
+#ggsave("typexseason2.png", c, bg = "transparent")
 
 checksite <- df2015 %>%
   group_by(season, site) %>% 
@@ -87,7 +88,7 @@ s <- ggplot(checksite, aes(x=season, y=site)) +
   scale_fill_gradient( low = "pink", high = "red") +
   ggtitle("Site by Season")
 s
-ggsave("sitexseason2.png", s, bg = "transparent")
+#ggsave("sitexseason2.png", s, bg = "transparent")
 
 checkmonth <- df2015 %>%
   group_by(month, sitetype) %>% 
@@ -107,7 +108,7 @@ m <- ggplot(checkmonth, aes(x=month, y=sitetype)) +
  # scale_x_discrete(limits=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")) +
   ggtitle("Site Type by Month")
 m
-ggsave("typexmonth2.png", m, bg = "transparent", width = 4, height = 2)
+#ggsave("typexmonth2.png", m, bg = "transparent", width = 4, height = 2)
 
 #### example from jon
 #ggd1_ymr <- ggplot(d1_ymr, aes(bayname,month)) +
@@ -122,6 +123,5 @@ ggsave("typexmonth2.png", m, bg = "transparent", width = 4, height = 2)
 #ggsave("figs/ppp.png", ppp, bg = "transparent")
 
 #________________________________________________________________________________
-df2015r
 
 #spp-sitet <- 
