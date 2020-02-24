@@ -1,7 +1,7 @@
 #South Bay Beach Seine 2015 - Ponds v Sloughs
 #LEZZGO - Rachel Fichman 
         # started: 11/??/2019
-#recently updated: 02/07/2020
+#recently updated: 02/24/2020
 
 library(here)
 library(tidyverse)
@@ -27,6 +27,8 @@ mutate(seasonr= case_when(month == "4"~"W",
                           month == "9"~"F",
                           month == "10"~"F",
                           month == "11"~"F"))
+
+speciesmeta <- read.csv(file="SpeciesMetaData_20200221.csv", header=TRUE, sep=",", dec=".", stringsAsFactors = FALSE)
 
 #________________________________________________________________________________
 
@@ -124,4 +126,4 @@ m
 
 #________________________________________________________________________________
 
-#spp-sitet <- 
+# classify certain species count columns
