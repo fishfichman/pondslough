@@ -12,7 +12,9 @@ library(tidyverse)
   #gonna code it out and do it all in R babyyyy
 
 
+
 rough_pondslough <- read.csv(file="allyearsclean.csv", header=TRUE, sep=",", dec=".", stringsAsFactors=FALSE) %>%
+
 #%>% replace(is.na(26:99), 0)
   rename(towdate = date, polstn = station) %>%
   mutate(seasonr= case_when(month == "4"~"W",
@@ -28,16 +30,20 @@ rough_pondslough <- read.csv(file="allyearsclean.csv", header=TRUE, sep=",", dec
                           month == "10"~"F",
                           month == "11"~"F"))
 
+
 long_pondslough <- rough_pondslough %>%
   gather(code, catch, -id, -calyr, -surveyyr, -surveynum, -towdate, -month, -season, -polstn, -lat, -long, -site, -sitetype, -floatct, -depthm, -depthf, -sec, -doc, -dop, -sal, -con, -temp, -time, -tideht, -method, -net, -seasonr) # %>% #make long format
   #drop_na(catch) #drop nas in catch (zeros for code, ie. no catch for that species)
 
+
 speciesmeta <- read.csv(file="SpeciesMetaData_20200221.csv", header=TRUE, sep=",", dec=".", stringsAsFactors = FALSE)
+
 
 pondslough  <- left_join(long_pondslough, speciesmeta, "code")
 
 pondslough_2015 <- pondslough %>%
   filter(., surveyyr==2015)
+
 #________________________________________________________________________________
 
 #separate out just the 2015 survery year ---- no longer works for long form
@@ -118,3 +124,18 @@ m <- ggplot(checkmonth, aes(x=month, y=sitetype)) +
  # scale_x_discrete(limits=c("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12")) +
   ggtitle("Site Type by Month")
 m
+
+#ggsave("typexmonth2.png", m, bg = "transparent", width = 4, height = 2)
+
+#### example from jon
+#ggd1_ymr <- ggplot(d1_ymr, aes(bayname,month)) +
+# geom_tile(aes(fill=n)) +
+ # theme_classic() +
+#  facet_wrap(~year) +
+ # ggtitle("Sampling by year") +
+#  scale_fill_gradient(low = "white", high = "red") +
+ # geom_text(aes(label = round(n, 1))) +
+#  guides(colour = FALSE)
+
+#ggsave("figs/ppp.png", ppp, bg = "transparent")
+
