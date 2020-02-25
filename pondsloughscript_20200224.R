@@ -39,6 +39,10 @@ pondslough  <- left_join(long_pondslough, speciesmeta, "code")
 pondslough_2015 <- pondslough %>%
   filter(., surveyyr==2015)
 
+native <- ggplot(pondslough_2015, aes(natinv, color = natinv)) +
+  geom_histogram(stat = "count")
+native
+
 #________________________________________________________________________________
 
 #separate out just the 2015 survery year ---- no longer works for long form
