@@ -12,10 +12,10 @@ library(tidyverse)
   #gonna code it out and do it all in R babyyyy
 
 
-allpondslough <- read.csv(file="allyearsclean.csv", header=TRUE, sep=",", dec=".", stringsAsFactors=FALSE) 
+allpondslough <- read.csv(file="allyearsclean.csv", header=TRUE, sep=",", dec=".", stringsAsFactors=FALSE) %>%
 #%>% replace(is.na(26:99), 0)
-allpondsloughr<-allpondslough %>%
-mutate(seasonr= case_when(month == "4"~"W",
+  rename(towdate = date, polstn = station) %>%
+  mutate(seasonr= case_when(month == "4"~"W",
                           month == "3"~"W",
                           month == "2"~"W",
                           month == "1"~"W",
@@ -28,7 +28,13 @@ mutate(seasonr= case_when(month == "4"~"W",
                           month == "10"~"F",
                           month == "11"~"F"))
 
+pondslough_l <- allpondslough %>%
+  gather(code, catch, -id, -calyr, -surveyyr, -surveynum, -towdate, -month, -season, -polstn, -lat, -long, -site, -sitetype, -floatct, -depthm, -depthf, -sec, -doc, -dop, -sal, -con, -temp, -time, -tideht, -method, -net, -seasonr) # %>% #make long format
+  #drop_na(catch) #drop nas in catch (zeros for code, ie. no catch for that species)
+
 speciesmeta <- read.csv(file="SpeciesMetaData_20200221.csv", header=TRUE, sep=",", dec=".", stringsAsFactors = FALSE)
+
+pondslough_ll  <- left_join(pondslough_l, speciesmeta, "code")
 
 #________________________________________________________________________________
 
@@ -126,4 +132,4 @@ m
 
 #________________________________________________________________________________
 
-# classify certain species count columns
+
